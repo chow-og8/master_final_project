@@ -26,3 +26,30 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     })
 })
+
+
+//Apify Crawling - showing result 
+
+
+document.addEventListener('DOMContentLoaded',() => {
+    fetch('dataset.json') 
+    .then(response => response.json()) 
+    .then(data => { 
+        const musicList = document.querySelector('feature-list'); 
+
+        data.forEach(music => { 
+            const div = document.createElement('div'); 
+            div.classList.add('feature-item'); 
+
+            div.innerHTML = `
+            <img src="${}" alt="${music.name}" style="width:100%, max-height:200px; 
+            <h3>${music.name}</h3> 
+            <p>${hotel.description.substring(0,150)}...</p> 
+            <p><strong>Rating:</strong> ${music.rating}  (${music.reviews} reviews)</p> 
+            <a href="#" target="_blank" class="cta-button">View Details</a> 
+        `; 
+            musicList.appendChild(div);
+        });
+    })
+    .catch(error => console.error('Error fetching dataset:', error))
+})
